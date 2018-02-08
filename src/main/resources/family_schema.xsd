@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://www.zaharenko.by/family_schema" xmlns:zahar="http://www.zaharenko.by/family_schema"
+	elementFormDefault="qualified">
+
+	<xs:element name="families" type="zahar:families_type" />
+
+	<xs:complexType name="families_type">
+		<xs:sequence>
+			<xs:element name="family" type="zahar:family_type" />
+			<!--<xs:element name="family" type="xs:string"/> -->
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="family_type">
+		<xs:all>
+			<xs:element name="mother" type="zahar:mother_type" />
+			<xs:element name="father" type="zahar:father_type" />
+			<xs:element name="children" type="zahar:children_type" />
+		</xs:all>
+		<xs:attribute name="alias" use="required" />
+	</xs:complexType>
+
+	<xs:complexType name="family_member_type">
+		<xs:sequence>
+			<xs:element name="name" type="xs:string" />
+			<xs:element name="surname" type="xs:string" />
+			<xs:element name="age" type="xs:int" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="mother_type">
+		<xs:complexContent>
+			<xs:extension base="zahar:family_member_type">
+				<xs:sequence>
+					<xs:element name="maiden-name" type="xs:string" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="father_type">
+		<xs:complexContent>
+			<xs:extension base="zahar:family_member_type">
+				<xs:sequence>
+					<xs:element name="speciality" type="xs:string" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+
+	<xs:complexType name="children_type">
+		<xs:sequence>
+		<xs:element name="child" type="zahar:child_type" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+
+	<xs:complexType name="child_type">
+		<xs:complexContent>
+			<xs:extension base="zahar:family_member_type">
+				<xs:sequence>
+					<xs:element name="gender" type="xs:string" maxOccurs="unbounded" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+
+</xs:schema>
+
